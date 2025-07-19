@@ -63,6 +63,30 @@ class Cart {
   calculateCartQuantity() {
     return this.cartItems.reduce((total, item) => total + item.quantity, 0);
   }
+
+  updateCartQuantity() {
+    let cartQuantity = 0;
+    this.cartItems.forEach((item) => {
+      cartQuantity += item.quantity;
+    });
+
+    const cartQuantityElement = document.querySelector('.js-cart-quantity');
+    if (cartQuantityElement) {
+      cartQuantityElement.innerHTML = cartQuantity;
+    }
+  }
+
+  updateCartQuantityDisplay() {
+    const cartQuantityElement = document.querySelector('.cart-quantity');
+    if (cartQuantityElement) {
+      cartQuantityElement.textContent = this.calculateCartQuantity();
+    }
+  }
+
+  resetCart() {
+    this.cart = [];
+    this.saveToStorage();
+  }
 }
 
   export const cart = new Cart('cart-oop');
@@ -81,3 +105,10 @@ class Cart {
     xhr.open('GET', 'https://supersimplebackend.dev/cart');
     xhr.send();
   }
+  
+    export async function loadCartFetch() {
+      const response = await fetch('https://supersimplebackend.dev/cart');
+      const text = await response.text();
+      //console.log(text);
+      return text;
+    }

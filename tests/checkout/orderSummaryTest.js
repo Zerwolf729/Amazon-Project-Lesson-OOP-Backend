@@ -11,12 +11,10 @@ describe('Test suite: renderOrderSummary', () => {
   const productName2 = 'Intermediate Size Basketball';
   const productPrice2 = '$20.95';
 
-  beforeAll((done) => {
-    loadProductsFetch().then(() => {
-      done();
-    });
+  beforeAll(async () => {
+    await loadProductsFetch()
   });
-
+  
   beforeEach(() => {
     // Reset localStorage setItem spy
     spyOn(localStorage, 'setItem');

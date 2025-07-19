@@ -88,6 +88,7 @@ export function renderPaymentSummary() {
       console.log('Unexpected Error. Please Try Again Later');
     }
 
+    cart.resetCart();
     window.location.href = 'orders.html'
   });
 }
